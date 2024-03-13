@@ -7,31 +7,27 @@
 
 import SwiftUI
 
-struct UIImagePickerControllerRepresentable: UIViewControllerRepresentable {
-    
+struct UICameraPickerControllerRepresentable: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     @Binding var showScreen: Bool
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let vc = UIImagePickerController()
         vc.allowsEditing = false
+        vc.sourceType = .camera
         vc.delegate = context.coordinator
         return vc
     }
-    
-    // from SwiftUI to UIKit
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
         
     }
     
-    // from UIKit to SwiftUI
     func makeCoordinator() -> Coordinator {
         return Coordinator(image: $image, showScreen: $showScreen)
     }
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        
         @Binding var image: UIImage?
         @Binding var showScreen: Bool
         
@@ -44,10 +40,45 @@ struct UIImagePickerControllerRepresentable: UIViewControllerRepresentable {
             guard let image = info[.originalImage] as? UIImage else { return }
             
             self.image = image
-            
-            showScreen = false
+            self.showScreen = false
+        }
+    }
+}
+
+struct UIImagePickerControllerRepresentable: UIViewControllerRepresentable {
+    @Binding var image: UIImage?
+    @Binding var showScreen: Bool
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let vc = UIImagePickerController()
+        vc.allowsEditing = false
+        vc.delegate = context.coordinator
+        return vc
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(image: $image, showScreen: $showScreen)
+    }
+    
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        @Binding var image: UIImage?
+        @Binding var showScreen: Bool
+        
+        init(image: Binding<UIImage?>, showScreen: Binding<Bool>) {
+            self._image = image
+            self._showScreen = showScreen
         }
         
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            
+            self.image = image
+            self.showScreen = false
+        }
     }
 }
 
@@ -55,7 +86,9 @@ struct UIImagePickerControllerRepresentable: UIViewControllerRepresentable {
 struct ImagePickerView: View {
     
     @State private var image: UIImage? = nil
-    @State private var show: Bool = false
+    @State private var showPhotos: Bool = false
+    @State private var showCamera: Bool = false
+    @State private var showConfirmationDialog: Bool = false
     
     var body: some View {
         VStack {
@@ -65,11 +98,23 @@ struct ImagePickerView: View {
                     .scaledToFill()
                     .frame(width: 150, height: 150)
             }
-            Button("Open", action: { show.toggle() })
+            Button("Open", action: { showConfirmationDialog.toggle() })
         }
-        .sheet(isPresented: $show, content: {
-            UIImagePickerControllerRepresentable(image: $image, showScreen: $show)
+        .frame(maxHeight: .infinity)
+        .sheet(isPresented: $showPhotos, content: {
+            UIImagePickerControllerRepresentable(image: $image, showScreen: $showPhotos)
         })
+        .sheet(isPresented: $showCamera, content: {
+            UICameraPickerControllerRepresentable(image: $image, showScreen: $showCamera)
+        })
+        .confirmationDialog("Dialog", isPresented: $showConfirmationDialog) {
+            Button("Камера") {
+                self.showCamera = true
+            }
+            Button("Галерея") {
+                self.showPhotos = true
+            }
+        }
     }
 }
 

@@ -23,7 +23,7 @@ struct ForWorldSkillsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            FileManagerView()
+            ImagePickerView()
             
            // UITestView()
             

@@ -812,6 +812,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ForWorldSkills/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "just for u";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
@@ -846,6 +848,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ForWorldSkills/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "just for u";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";

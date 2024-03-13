@@ -1,0 +1,8 @@
+[18:56:17 2024-03-12] FETCHING Version 2.34.0
+[18:56:17 2024-03-12] DOWNLOADING https://github.com/spicetify/spicetify-cli/releases/download/v2.34.0/spicetify-2.34.0-darwin-arm64.tar.gz
+[18:56:23 2024-03-12] EXTRACTING /Users/vadimmartynenko/.spicetify/spicetify.tar.gz
+[18:56:23 2024-03-12] SETTING EXECUTABLE PERMISSIONS TO /Users/vadimmartynenko/.spicetify/spicetify
+[18:56:23 2024-03-12] REMOVING /Users/vadimmartynenko/.spicetify/spicetify.tar.gz
+[18:56:23 2024-03-12] spicetify path already set in /Users/vadimmartynenko/.zshrc, continuing...
+[18:56:23 2024-03-12] spicetify v2.34.0 was installed successfully to /Users/vadimmartynenko/.spicetify
+[18:56:23 2024-03-12] Run 'spicetify --help' to get started
