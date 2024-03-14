@@ -95,7 +95,8 @@ struct ImagePickerView: View {
             if let image {
                 Image(uiImage: image)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
+                    .clipShape(Circle())
                     .frame(width: 150, height: 150)
             }
             Button("Open", action: { showConfirmationDialog.toggle() })
